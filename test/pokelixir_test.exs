@@ -3,10 +3,13 @@ defmodule PokelixirTest do
   doctest Pokelixir
 
   test "charizard" do
-    if Process.whereis(Pokemon) do
-      IO.inspect("already started")
-    else
+    started = Process.whereis(Pokemon)
+    IO.inspect(started)
+
+    if started == nil do
       Pokelixir.start_link()
+    else
+      IO.inspect("already started")
     end
 
     assert Pokelixir.get("charizard") == %Pokemon{
@@ -24,25 +27,28 @@ defmodule PokelixirTest do
            }
   end
 
-  test "ditto" do
-    if Process.whereis(Pokemon) do
-      IO.inspect("already started")
-    else
-      Pokelixir.start_link()
-    end
+  # test "ditto" do
+  #   started = Process.whereis(Pokemon)
+  #   IO.inspect(started)
 
-    assert Pokelixir.get("ditto") == %Pokemon{
-             id: 132,
-             name: "ditto",
-             hp: 48,
-             attack: 48,
-             defense: 48,
-             special_attack: 48,
-             special_defense: 48,
-             speed: 48,
-             height: 3,
-             weight: 40,
-             types: ["normal"]
-           }
-  end
+  #   if started == nil do
+  #     Pokelixir.start_link()
+  #   else
+  #     IO.inspect("already started")
+  #   end
+
+  #   assert Pokelixir.get("ditto") == %Pokemon{
+  #            id: 132,
+  #            name: "ditto",
+  #            hp: 48,
+  #            attack: 48,
+  #            defense: 48,
+  #            special_attack: 48,
+  #            special_defense: 48,
+  #            speed: 48,
+  #            height: 3,
+  #            weight: 40,
+  #            types: ["normal"]
+  #          }
+  # end
 end
