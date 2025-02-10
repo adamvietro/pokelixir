@@ -10,13 +10,13 @@ You have 2 option for running the program.
 
 Simply ./pokelixir and follow the instructions.
 
-2) You can run 'iex -S mix" 
-You must then run 'Pokelixir.start_link()
-to create the link
-the run either `Pokelixir.get("pokemon_name")
-where "pokemon_name" is the name of the Pokemon you want to look up.
-or run 'Pokelixir.all()' 
-to get a list of every Pokemon.
+2) You can run 'iex -S mix'  
+You must then run 'Pokelixir.start_link()  
+to create the link  
+`Pokelixir.get("pokemon_name")  
+where "pokemon_name" is the name of the Pokemon you want to look up.  
+'Pokelixir.all()'   
+to get a list of every Pokemon.  
 
 ## Installation
 
