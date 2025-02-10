@@ -87,6 +87,11 @@ defmodule Pokelixir do
     }
   end
 
+  @doc """
+  Pulls the first 20 Pokemon and sets the next request for subsequent requests.
+
+  Also builds the list of the first 20 Pokemon structs.
+  """
   def all(first \\ "https://pokeapi.co/api/v2/pokemon/") do
     decoded = build_decode_url(first)
 
@@ -98,6 +103,9 @@ defmodule Pokelixir do
     all(next_set, pokemon_list)
   end
 
+  @doc """
+  Recursively calls and build the Pokemon struct 20 at a time.
+  """
   def all(next_set, poke_list) do
     decoded = build_decode_url(next_set)
 
@@ -115,6 +123,9 @@ defmodule Pokelixir do
     end
   end
 
+  @doc """
+  Used to create the Finch request and start the Supervisor for the process.
+  """
   def start_link() do
     children = [
       {Finch, name: Pokemon}
@@ -124,4 +135,18 @@ defmodule Pokelixir do
 
     Finch.start_link(name: Pokemon)
   end
+
+  @doc """
+  Used to create an other child that has a different name from Pokemon. Might be used later for Async.
+  """
+  def start_link(named) do
+    children = [
+      {Finch, name: named}
+    ]
+
+    Supervisor.start_link(children, strategy: :one_for_one)
+
+    Finch.start_link(name: named)
+  end
+
 end
